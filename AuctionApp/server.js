@@ -1,17 +1,17 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const httpStatus = require("http-status");
 const cookieParser = require("cookie-parser");
-const dotenv = require("dotenv").config();
 const config = require("../AuctionApp/config/config");
 const { errorHandler } = require("./middleware/errorMiddleware");
-const connectDB = require("./config/db");
-const port = process.env.PORT || 8000;
 
-connectDB();
+// const connectDB = require("./config/db");
+
+// connectDB();
 const app = express();
 
 app.use(express.json());
@@ -27,6 +27,7 @@ app.use(mongoSanitize());
 // parse cookies
 app.use(cookieParser());
 // enable cors
+
 const corsConfig = {
   origin: config.corsOrigin,
   credentials: true,
@@ -39,4 +40,8 @@ app.use("/api/users", require("./routes/userRoutes"));
 
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`server running on port ${port}`));
+mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
+  app.listen(config.port, () =>
+    console.log(`server running on port ${config.port}`)
+  );
+});
