@@ -8,6 +8,7 @@ const httpStatus = require("http-status");
 const cookieParser = require("cookie-parser");
 const config = require("../AuctionApp/config/config");
 const { errorHandler } = require("./middleware/errorMiddleware");
+const routes = require("../AuctionApp/routes/v1");
 
 // const connectDB = require("./config/db");
 
@@ -36,7 +37,8 @@ const corsConfig = {
 app.use(cors(corsConfig));
 app.options("*", cors(corsConfig));
 
-app.use("/api/users", require("./routes/userRoutes"));
+// v1 api routes
+app.use("/api/v1", routes);
 
 app.use(errorHandler);
 
