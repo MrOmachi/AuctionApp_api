@@ -3,7 +3,8 @@ const { itemService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
 
 const createItem = catchAsync(async (req, res) => {
-  item = await itemService.createItem(req.user, req.body.name);
+  console.log(req.body);
+  item = await itemService.createItem(req.body);
   res.status(httpStatus.CREATED).send(item);
 });
 
