@@ -6,12 +6,6 @@ const createItem = async (item) => {
     name: item.name,
     description: item.description,
     price: item.price,
-    // user: [
-    //   {
-    //     id: user.id,
-    //     name: user.name,
-    //   },
-    // ],
   };
   const createdItem = await Item.create(itemBody);
   return createdItem;
