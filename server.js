@@ -6,9 +6,9 @@ const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const httpStatus = require("http-status");
 const cookieParser = require("cookie-parser");
-const config = require("../AuctionApp/config/config");
-const { errorHandler } = require("./middleware/errorMiddleware");
-const routes = require("../AuctionApp/routes/v1");
+const config = require("./src/config/config");
+const { errorHandler } = require("./src/middleware/errorMiddleware");
+const routes = require("./src/routes/v1");
 
 // const connectDB = require("./config/db");
 
