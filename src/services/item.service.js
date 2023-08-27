@@ -1,5 +1,6 @@
 const httpStatus = require("http-status");
 const { Item } = require("../models");
+const ApiError = require("../utils/ApiError");
 
 const createItem = async (item) => {
   const itemBody = {
@@ -11,12 +12,37 @@ const createItem = async (item) => {
   return createdItem;
 };
 
-const getItemById = async (id) => {
-  return await Item.findById(id);
+const getItemById = async (itemId) => {
+  return await Item.findById(itemId);
 };
 
 const getAllItems = async () => {
   return await Item.find();
 };
 
-module.exports = { createItem, getItemById, getAllItems };
+const updateItemById = async (itemId) => {
+  const item = await getItemById(itemId);
+  if (!item) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Item not found");
+  }
+  Object.assign(item);
+  await item.save();
+  return item;
+};
+
+const deleteItemById = async (itemId) => {
+  const item = await getItemById(itemId);
+  if (!item) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Item not found");
+  }
+  await item.remove();
+  return item;
+};
+
+module.exports = {
+  createItem,
+  getItemById,
+  getAllItems,
+  updateItemById,
+  deleteItemById,
+};
