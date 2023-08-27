@@ -1,12 +1,9 @@
 const httpStatus = require("http-status");
 const { itemService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
-const { getMe } = require("./userController");
-const User = require("../models/user.model");
 
 const createItem = catchAsync(async (req, res) => {
-  const currentUser = req.body.userid;
-  const authenticatedUser = await User.findById(currentUser);
+  const authenticatedUser = req.user;
   if (authenticatedUser.role !== "admin") {
     return res
       .status(httpStatus.FORBIDDEN)
