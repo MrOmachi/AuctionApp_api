@@ -14,4 +14,12 @@ router
     itemController.createItem
   );
 
+router
+  .route("/:itemId")
+  .get(
+    protect,
+    validate(itemValidation.getItemById),
+    itemController.getItemById
+  );
+
 module.exports = router;
