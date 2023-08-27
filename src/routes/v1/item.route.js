@@ -8,11 +8,8 @@ const router = express.Router();
 
 router
   .route("/")
-  .post(
-    protect,
-    validate(itemValidation.createItem),
-    itemController.createItem
-  );
+  .post(protect, validate(itemValidation.createItem), itemController.createItem)
+  .get(protect, itemController.getAllItems);
 
 router
   .route("/:itemId")

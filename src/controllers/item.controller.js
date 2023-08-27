@@ -19,8 +19,8 @@ const getItemById = catchAsync(async (req, res) => {
 });
 
 const getAllItems = catchAsync(async (req, res) => {
-  const itemById = await itemService.getAllItems();
-  res.status(httpStatus.OK).send(itemById);
+  const items = await itemService.getAllItems();
+  res.status(httpStatus.OK).send(items);
 });
 
 module.exports = {
