@@ -14,12 +14,12 @@ const createItem = catchAsync(async (req, res) => {
 });
 
 const getItemById = catchAsync(async (req, res) => {
-  const itemById = await itemService.getItemById(req.body);
+  const itemById = await itemService.getItemById(req.params.itemId);
   res.status(httpStatus.OK).send(itemById);
 });
 
 const getAllItems = catchAsync(async (req, res) => {
-  const itemById = await itemService.getAllItems(req.body);
+  const itemById = await itemService.getAllItems();
   res.status(httpStatus.OK).send(itemById);
 });
 
