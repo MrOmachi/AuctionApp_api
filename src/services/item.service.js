@@ -1,5 +1,5 @@
 const httpStatus = require("http-status");
-const { User, Item } = require("../models");
+const { Item } = require("../models");
 
 const createItem = async (item) => {
   const itemBody = {
@@ -11,4 +11,12 @@ const createItem = async (item) => {
   return createdItem;
 };
 
-module.exports = { createItem };
+const getItemById = async (id) => {
+  return await Item.findById(id);
+};
+
+const getAllItems = async () => {
+  return await Item.find();
+};
+
+module.exports = { createItem, getItemById, getAllItems };

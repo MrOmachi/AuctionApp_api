@@ -13,6 +13,18 @@ const createItem = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(item);
 });
 
+const getItemById = catchAsync(async (req, res) => {
+  const itemById = await itemService.getItemById(req.body);
+  res.status(httpStatus.OK).send(itemById);
+});
+
+const getAllItems = catchAsync(async (req, res) => {
+  const itemById = await itemService.getAllItems(req.body);
+  res.status(httpStatus.OK).send(itemById);
+});
+
 module.exports = {
   createItem,
+  getItemById,
+  getAllItems,
 };
