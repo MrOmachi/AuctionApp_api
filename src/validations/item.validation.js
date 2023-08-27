@@ -14,7 +14,21 @@ const getItemById = {
   }),
 };
 
+const updateItemById = {
+  params: Joi.object().keys({
+    itemId: Joi.string().custom(objectId),
+  }),
+};
+
+const deleteItemById = {
+  params: Joi.object().keys({
+    itemId: Joi.string().custom(objectId),
+  }),
+};
+
 module.exports = {
   createItem,
   getItemById,
+  updateItemById,
+  deleteItemById,
 };

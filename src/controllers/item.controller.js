@@ -23,6 +23,8 @@ const getAllItems = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(items);
 });
 
+const updateItemById = catchAsync(async (req, res) => {});
+
 module.exports = {
   createItem,
   getItemById,
