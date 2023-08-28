@@ -35,7 +35,7 @@ const deleteItemById = async (itemId) => {
   if (!item) {
     throw new ApiError(httpStatus.NOT_FOUND, "Item not found");
   }
-  await item.remove();
+  await item.deleteOne();
   return item;
 };
 

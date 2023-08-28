@@ -22,6 +22,11 @@ router
     protect,
     validate(itemValidation.updateItemById),
     itemController.updateItemById
+  )
+  .delete(
+    protect,
+    validate(itemValidation.deleteItemById),
+    itemController.deleteItemById
   );
 
 module.exports = router;
