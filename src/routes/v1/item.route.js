@@ -17,6 +17,11 @@ router
     protect,
     validate(itemValidation.getItemById),
     itemController.getItemById
+  )
+  .patch(
+    protect,
+    validate(itemValidation.updateItemById),
+    itemController.updateItemById
   );
 
 module.exports = router;

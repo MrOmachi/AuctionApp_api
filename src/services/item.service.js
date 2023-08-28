@@ -20,12 +20,12 @@ const getAllItems = async () => {
   return await Item.find();
 };
 
-const updateItemById = async (itemId) => {
+const updateItemById = async (itemId, updateBody) => {
   const item = await getItemById(itemId);
   if (!item) {
     throw new ApiError(httpStatus.NOT_FOUND, "Item not found");
   }
-  Object.assign(item);
+  Object.assign(item, updateBody);
   await item.save();
   return item;
 };

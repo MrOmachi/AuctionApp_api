@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const { itemService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
+const ApiError = require("../utils/ApiError");
 
 const createItem = catchAsync(async (req, res) => {
   const authenticatedUser = req.user;
@@ -23,10 +24,21 @@ const getAllItems = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(items);
 });
 
-const updateItemById = catchAsync(async (req, res) => {});
+const updateItemById = catchAsync(async (req, res) => {
+  const itemOld = await itemService.getItemById(req.params.itemId);
+  const name = req.body.name || itemOld.name;
+  const price = req.body.price || itemOld.price;
+
+  const item = await itemService.updateItemById(req.params.itemId, {
+    name,
+    price,
+  });
+  res.status(httpStatus.NO_CONTENT).send(item);
+});
 
 module.exports = {
   createItem,
   getItemById,
   getAllItems,
+  updateItemById,
 };

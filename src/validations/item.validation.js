@@ -18,6 +18,10 @@ const updateItemById = {
   params: Joi.object().keys({
     itemId: Joi.string().custom(objectId),
   }),
+  body: Joi.object().keys({
+    name: Joi.string().required(),
+    price: Joi.number().required(),
+  }),
 };
 
 const deleteItemById = {
