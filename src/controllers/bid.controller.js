@@ -24,7 +24,16 @@ const getBidById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(currentBid);
 });
 
+const updateBidById = catchAsync(async (req, res) => {
+  const data = await itemService.getItemById(req.body);
+  const bid = await bidService.updateBidById(req.params.bidId, {
+    data,
+  });
+  // res.status(httpStatus.NO_CONTENT).send(item);
+});
+
 module.exports = {
   createBid,
   getBidById,
+  updateBidById,
 };

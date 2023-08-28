@@ -12,13 +12,13 @@ const getBidById = async (bidId) => {
   return await Bid.findById(bidId);
 };
 
-const updateBidById = async (bidId, itemId) => {
+const updateBidById = async (bidId, bidData) => {
   const currentBid = await getBidById(bidId);
   if (!currentBid) {
     throw new ApiError(httpStatus.NOT_FOUND, "Bid item does not exist");
   }
   console.log(currentBid);
-  const currentItem = await getItemById(itemId);
+  const currentItem = await getItemById(bidData.itemId);
   if (!currentItem) {
     throw new ApiError(httpStatus.NOT_FOUND, "Item not found");
   }
@@ -35,6 +35,7 @@ const updateBidById = async (bidId, itemId) => {
   }
 
   console.log(currentItem);
+  console.log(bidData.bidPrice);
 };
 
 module.exports = {

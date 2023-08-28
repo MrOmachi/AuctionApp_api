@@ -12,6 +12,11 @@ router
 
 router
   .route("/:bidId")
-  .get(protect, validate(bidValidation.getBidById), bidController.getBidById);
+  .get(protect, validate(bidValidation.getBidById), bidController.getBidById)
+  .patch(
+    protect,
+    validate(bidValidation.updateBidById),
+    bidController.updateBidById
+  );
 
 module.exports = router;

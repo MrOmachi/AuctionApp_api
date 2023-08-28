@@ -13,7 +13,18 @@ const getBidById = {
   }),
 };
 
+const updateBidById = {
+  params: Joi.object().keys({
+    bidId: Joi.string().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    itemId: Joi.string().custom(objectId),
+    bidPrice: Joi.number().required(),
+  }),
+};
+
 module.exports = {
   createItem,
   getBidById,
+  updateBidById,
 };
