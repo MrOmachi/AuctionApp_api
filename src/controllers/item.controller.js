@@ -36,9 +36,15 @@ const updateItemById = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send(item);
 });
 
+const deleteItemById = catchAsync(async (req, res) => {
+  const item = await itemService.deleteItemById(req.params.itemId);
+  res.status(httpStatus.NO_CONTENT).send(item);
+});
+
 module.exports = {
   createItem,
   getItemById,
   getAllItems,
   updateItemById,
+  deleteItemById,
 };
