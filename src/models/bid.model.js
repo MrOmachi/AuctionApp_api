@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const bidSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User,
+    ref: "User",
     required: true,
   },
   item: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Item,
+    ref: "Item",
     required: true,
   },
   countdown: {
