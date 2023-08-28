@@ -2,16 +2,11 @@ const httpStatus = require("http-status");
 const { Bid } = require("../models");
 const ApiError = require("../utils/ApiError");
 
-const createBid = async (user, item, time) => {
-  const userBody = {
-    name: user.name,
-  };
-  const itemBody = {
-    itemName: item.name,
-    price: item.price,
-  };
-  const countdown = time;
-
-  const createBid = await Bid.create(userBody, itemBody, countdown);
+const createBid = async (data) => {
+  const createBid = await Bid.create(data);
   return createBid;
+};
+
+module.exports = {
+  createBid,
 };

@@ -1,15 +1,21 @@
 const httpStatus = require("http-status");
-const { bidService } = require("../services");
+const { bidService, itemService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
 
 const createBid = catchAsync(async (req, res) => {
-  const bidItem = req.body;
+  const currentBidItem = await itemService.getItemById(req.body.itemId);
   const authenticatedUser = req.user;
   if (authenticatedUser.role !== "admin") {
     return res.status(httpStatus.FORBIDDEN).send("Only admins can start bids");
   }
+  const bidData = {
+    user: authenticatedUser,
+    item: currentBidItem,
+  };
 
-  const bid = await bidService.createBid(authenticatedUser.name, bidItem);
+  const bid = await bidService.createBid(bidData);
+
+  console.log(bid);
   res.status(httpStatus.CREATED).send(bid);
 });
 
