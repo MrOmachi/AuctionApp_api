@@ -10,4 +10,8 @@ router
   .route("/")
   .post(protect, validate(bidValidation.createItem), bidController.createBid);
 
+router
+  .route("/:bidId")
+  .get(protect, validate(bidValidation.getBidById), bidController.getBidById);
+
 module.exports = router;

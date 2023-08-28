@@ -19,6 +19,12 @@ const createBid = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(bid);
 });
 
+const getBidById = catchAsync(async (req, res) => {
+  const currentBid = await bidService.getBidById(req.params.bidId);
+  res.status(httpStatus.OK).send(currentBid);
+});
+
 module.exports = {
   createBid,
+  getBidById,
 };

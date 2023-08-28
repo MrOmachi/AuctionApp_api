@@ -7,6 +7,13 @@ const createItem = {
   }),
 };
 
+const getBidById = {
+  params: Joi.object().keys({
+    bidId: Joi.string().custom(objectId),
+  }),
+};
+
 module.exports = {
   createItem,
+  getBidById,
 };
