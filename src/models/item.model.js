@@ -1,3 +1,4 @@
+const { boolean } = require("joi");
 const mongoose = require("mongoose");
 
 const itemSchema = mongoose.Schema({
@@ -14,6 +15,11 @@ const itemSchema = mongoose.Schema({
   price: {
     type: Number,
     default: 0,
+  },
+  active: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 
