@@ -9,8 +9,9 @@ const cookieParser = require("cookie-parser");
 const config = require("./src/config/config");
 const { errorHandler } = require("./src/middleware/errorMiddleware");
 const routes = require("./src/routes/v1");
-
-// const connectDB = require("./config/db");
+const http = require("http");
+const { Server } = require("socket.io");
+const socketRoutes = require("./sockets");
 
 // connectDB();
 const app = express();
@@ -36,6 +37,15 @@ const corsConfig = {
 };
 app.use(cors(corsConfig));
 app.options("*", cors(corsConfig));
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: config.corsOriginSocket,
+    methods: ["GET", "POST"],
+  },
+});
+socketRoutes(io);
 
 // v1 api routes
 app.use("/api/v1", routes);
@@ -43,7 +53,10 @@ app.use("/api/v1", routes);
 app.use(errorHandler);
 
 mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
-  app.listen(config.port, () =>
-    console.log(`server running on port ${config.port}`)
-  );
+  app.listen(config.port, () => {
+    console.log(`server running on port ${config.port}`);
+    server.listen(config.socketport, () => {
+      console.log(`Socket is running ${config.socketport}`);
+    });
+  });
 });
